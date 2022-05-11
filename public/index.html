@@ -12,7 +12,139 @@
     />
 
     <link rel="stylesheet" href="css/main.css" />
-    <script defer src="js/script.js"></script>
+    <script defer src="https://unpkg.com/phosphor-icons"></script>
+    <script defer src="./js/script.js"></script>
   </head>
-  <body></body>
+
+  <!-- class dark body -->
+  <body>
+    <header class="header center">
+      <nav class="navigation">
+        <div class="navigation__logo">
+          <h1 class="navigation__text">Where in the world?</h1>
+        </div>
+
+        <div class="navigation__toggle">
+          <!-- <i class="ph-sun"></i> -->
+          <i class="ph-moon"></i>
+          <span>Dark Mode</span>
+        </div>
+      </nav>
+    </header>
+
+    <main class="main">
+      <form>
+        <div class="inputs">
+          <div class="inputs__icon">
+            <i class="ph-magnifying-glass icon--left"></i>
+          </div>
+
+          <div class="inputs__textbox">
+            <input
+              type="text"
+              class="search__input"
+              placeholder="Search for a country..."
+            />
+          </div>
+        </div>
+
+        <div class="select__wrapper">
+          <select name="regions" class="select">
+            <option value="none" selected disabled hidden>
+              Filter by region
+            </option>
+            <option value="africa">Africa</option>
+            <option value="americas">America</option>
+            <option value="asia">Asia</option>
+            <option value="europe">Europe</option>
+            <option value="oceania">Oceania</option>
+          </select>
+          <span class="arrow__down"><i class="ph-caret-down"></i></span>
+        </div>
+      </form>
+
+      <section class="cards__container">
+        <div class="card">
+          <div class="card__img">
+            <img
+              src="https://flagcdn.com/um.svg"
+              alt="flag"
+              class="card__flag"
+            />
+          </div>
+          <div class="card__desc">
+            <h2 class="card__name">United States of America</h2>
+            <p class="card__text"><strong>Population:</strong> 323,947,000</p>
+            <p class="card__text"><strong>Region:</strong> Americas</p>
+            <p class="card__text"><strong>Capital:</strong> Washington, D.C</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card__img">
+            <img
+              src="https://flagcdn.com/jp.svg"
+              alt="flag"
+              class="card__flag"
+            />
+          </div>
+          <div class="card__desc">
+            <h2 class="card__name">Japan</h2>
+            <p class="card__text"><strong>Population:</strong> 323,947,000</p>
+            <p class="card__text"><strong>Region:</strong> Americas</p>
+            <p class="card__text"><strong>Capital:</strong> Washington, D.C</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card__img">
+            <img
+              src="https://flagcdn.com/ph.svg"
+              alt="flag"
+              class="card__flag"
+            />
+          </div>
+          <div class="card__desc">
+            <h2 class="card__name">Philippines</h2>
+            <p class="card__text"><strong>Population:</strong> 323,947,000</p>
+            <p class="card__text"><strong>Region:</strong> Americas</p>
+            <p class="card__text"><strong>Capital:</strong> Washington, D.C</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card__img">
+            <img
+              src="https://flagcdn.com/th.svg"
+              alt="flag"
+              class="card__flag"
+            />
+          </div>
+          <div class="card__desc">
+            <h2 class="card__name">Thailand</h2>
+            <p class="card__text"><strong>Population:</strong> 323,947,000</p>
+            <p class="card__text"><strong>Region:</strong> Americas</p>
+            <p class="card__text"><strong>Capital:</strong> Washington, D.C</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card__img">
+            <img
+              src="https://flagcdn.com/kh.svg"
+              alt="flag"
+              class="card__flag"
+            />
+          </div>
+          <div class="card__desc">
+            <h2 class="card__name">United States of America</h2>
+            <p class="card__text"><strong>Population:</strong> 323,947,000</p>
+            <p class="card__text"><strong>Region:</strong> Americas</p>
+            <p class="card__text"><strong>Capital:</strong> Washington, D.C</p>
+          </div>
+        </div>
+        <!-- card -->
+      </section>
+    </main>
+  </body>
 </html>

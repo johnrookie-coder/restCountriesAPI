@@ -1,0 +1,27 @@
+form {
+  display: flex;
+  flex-direction: column;
+
+  margin: 4rem auto;
+  max-width: 120rem;
+  width: 90%;
+
+  .inputs {
+    flex: 0 1 45%;
+    margin-bottom: 3.2rem;
+  }
+
+  .select__wrapper {
+    flex: 0 1 20%;
+  }
+
+  @media (min-width: 76.8em) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .inputs {
+      margin-bottom: 0;
+    }
+  }
+}

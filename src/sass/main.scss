@@ -1,3 +1,11 @@
 @use "base/colors";
 @use "base/reset";
 @use "base/utilities";
+
+@use "components/cards";
+@use "components/inputs";
+@use "components/navigations";
+
+@use "layout/cardsContainer";
+@use "layout/header";
+@use "layout/form";

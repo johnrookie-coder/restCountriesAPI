@@ -23,9 +23,217 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  background-color: var(--lightModeBg);
   color: var(--primaryTextDark);
   font-family: "Nunito Sans", sans-serif;
   font-weight: 400;
   user-select: none;
   scroll-behavior: smooth;
+}
+
+.card {
+  background-color: var(--primaryTextLight);
+  border-radius: 6px;
+  box-shadow: 0 0.8rem 1.6rem rgba(17, 21, 23, 0.15);
+  justify-self: center;
+  width: 100%;
+  max-width: 30rem;
+}
+.card__img {
+  border-bottom: 1px solid rgba(117, 115, 115, 0.2);
+}
+.card__flag {
+  object-fit: cover;
+  height: 16rem;
+  width: 100%;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+.card__desc {
+  padding: 4rem 2rem;
+}
+.card__name {
+  color: inherit;
+  font-size: 2rem;
+  line-height: 1.2;
+  margin-bottom: 1.6rem;
+}
+.card__text {
+  font-size: 1.6rem;
+  font-weight: 300;
+  line-height: 2;
+}
+.card__text strong {
+  font-family: inherit;
+  font-weight: 600;
+}
+
+.inputs,
+.select {
+  position: relative;
+  background-color: var(--primaryTextLight);
+  box-shadow: 0 0.8rem 1.6rem rgba(17, 21, 23, 0.075);
+  border-radius: 6px;
+  color: inherit;
+  font-family: inherit;
+  font-size: 1.6rem;
+  min-height: 5rem;
+}
+
+.search__input {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  color: var(--darkGray);
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: 1px;
+  padding: 1.6rem 1.6rem 1.6rem 4.8rem;
+  width: 100%;
+}
+
+.icon--left {
+  position: absolute;
+  top: 1.6rem;
+  left: 2rem;
+  color: var(--darkGray);
+  height: 100%;
+  z-index: 100;
+}
+
+.select__wrapper {
+  position: relative;
+  width: 65%;
+}
+.select__wrapper .arrow__down {
+  position: absolute;
+  top: 2rem;
+  right: 1.6rem;
+  font-size: 1.6rem;
+  z-index: 200;
+  pointer-events: none;
+}
+
+.select {
+  border: none;
+  outline: none;
+  color: var(--primaryTextDark);
+  font-family: inherit;
+  font-size: 1.6rem;
+  padding: 1.6rem;
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.select option {
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 0;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 120rem;
+}
+.navigation__text {
+  font-family: inherit;
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+.navigation__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+.navigation__toggle i {
+  margin-right: 0.4rem;
+}
+
+.cards__container {
+  display: grid;
+  overflow: hidden;
+  margin: 8rem auto;
+  max-width: 120rem;
+  width: 90%;
+}
+@media (min-width: 300px) {
+  .cards__container {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 3.2rem 0;
+  }
+}
+@media (min-width: 768px) {
+  .cards__container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem 2rem;
+  }
+}
+@media (min-width: 992px) {
+  .cards__container {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6rem 2.4rem;
+  }
+}
+
+.dark {
+  background-color: var(--darkBlueShade);
+  color: var(--primaryTextLight);
+}
+.dark .header {
+  background-color: var(--darkBlue);
+}
+.dark .inputs,
+.dark .search__input,
+.dark .select {
+  background-color: var(--darkBlue);
+  color: inherit;
+}
+.dark .card {
+  background-color: var(--darkBlue);
+}
+
+.header {
+  background-color: var(--primaryTextLight);
+  box-shadow: 0 8px 16px rgba(17, 21, 23, 0.1);
+  width: 100%;
+}
+
+.center {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 4rem auto;
+  max-width: 120rem;
+  width: 90%;
+}
+form .inputs {
+  flex: 0 1 45%;
+  margin-bottom: 3.2rem;
+}
+form .select__wrapper {
+  flex: 0 1 20%;
+}
+@media (min-width: 76.8em) {
+  form {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  form .inputs {
+    margin-bottom: 0;
+  }
 }

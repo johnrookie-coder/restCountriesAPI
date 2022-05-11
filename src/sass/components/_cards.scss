@@ -1,0 +1,46 @@
+.card {
+  background-color: var(--primaryTextLight);
+  border-radius: 6px;
+  box-shadow: 0 0.8rem 1.6rem rgba(17, 21, 23, 0.15);
+
+  justify-self: center;
+
+  width: 100%;
+  max-width: 30rem;
+
+  &__img {
+    border-bottom: 1px solid rgba(117, 115, 115, 0.2);
+  }
+
+  &__flag {
+    object-fit: cover;
+    height: 16rem;
+    width: 100%;
+
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+
+  &__desc {
+    padding: 4rem 2rem;
+  }
+
+  &__name {
+    color: inherit;
+    font-size: 2rem;
+    line-height: 1.2;
+
+    margin-bottom: 1.6rem;
+  }
+
+  &__text {
+    font-size: 1.6rem;
+    font-weight: 300;
+    line-height: 2;
+
+    strong {
+      font-family: inherit;
+      font-weight: 600;
+    }
+  }
+}

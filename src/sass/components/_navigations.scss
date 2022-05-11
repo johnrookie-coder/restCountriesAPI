@@ -1,0 +1,32 @@
+.navigation {
+  // border: 2px solid red;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 2rem 0;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 120rem;
+
+  &__text {
+    font-family: inherit;
+    font-size: 1.8rem;
+    font-weight: 800;
+  }
+
+  &__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    font-size: 1.4rem;
+    font-weight: 600;
+
+    i {
+      margin-right: 0.4rem;
+    }
+  }
+}

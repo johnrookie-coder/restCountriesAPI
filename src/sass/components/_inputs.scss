@@ -1,0 +1,83 @@
+// Form inputs
+.inputs,
+.select {
+  position: relative;
+  background-color: var(--primaryTextLight);
+  box-shadow: 0 0.8rem 1.6rem rgba(17, 21, 23, 0.075);
+  border-radius: 6px;
+
+  color: inherit;
+  font-family: inherit;
+  font-size: 1.6rem;
+
+  min-height: 5rem;
+}
+
+// Text input
+.search__input {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  color: var(--darkGray);
+
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: 1px;
+
+  padding: 1.6rem 1.6rem 1.6rem 4.8rem;
+  width: 100%;
+}
+
+.icon--left {
+  position: absolute;
+  top: 1.6rem;
+  left: 2rem;
+
+  color: var(--darkGray);
+  height: 100%;
+  z-index: 100;
+}
+
+// Arrow of the select element
+.select__wrapper {
+  position: relative;
+  width: 65%;
+
+  .arrow__down {
+    position: absolute;
+    top: 2rem;
+    right: 1.6rem;
+
+    font-size: 1.6rem;
+    z-index: 200;
+
+    pointer-events: none;
+  }
+}
+
+// Select input
+.select {
+  border: none;
+  outline: none;
+
+  color: var(--primaryTextDark);
+  font-family: inherit;
+  font-size: 1.6rem;
+
+  padding: 1.6rem;
+  width: 100%;
+
+  // Hide default arrow
+  -webkit-appearance: none;
+  appearance: none;
+
+  option {
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+  }
+}
