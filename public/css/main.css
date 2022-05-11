@@ -1,0 +1,31 @@
+:root {
+  --darkBlue: hsl(209, 23%, 22%);
+  --darkBlueShade: hsl(207, 26%, 17%);
+  --primaryTextDark: hsl(200, 15%, 8%);
+  --primaryTextLight: hsl(0, 0%, 100%);
+  --darkGray: hsl(0, 0%, 52%);
+  --lightModeBg: hsl(0, 0%, 98%);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--primaryTextDark);
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 400;
+  user-select: none;
+  scroll-behavior: smooth;
+}
