@@ -2,10 +2,12 @@
 @use "base/reset";
 @use "base/utilities";
 
+@use "components/buttons";
 @use "components/cards";
 @use "components/inputs";
 @use "components/navigations";
 
 @use "layout/cardsContainer";
+@use "layout/detailedCountryInfo";
 @use "layout/header";
 @use "layout/form";

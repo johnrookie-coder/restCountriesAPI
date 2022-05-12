@@ -7,7 +7,7 @@
   width: 90%;
 
   @media (min-width: 300px) {
-    grid-template-columns: repeat(1, 1fr);
+    // grid-template-columns: repeat(1, 1fr);
     gap: 3.2rem 0;
   }
 
@@ -41,4 +41,20 @@
   .card {
     background-color: var(--darkBlue);
   }
+
+  .btn {
+    background-color: var(--darkBlue);
+    color: var(--primaryTextLight);
+
+    &__border:hover,
+    &__back:hover {
+      background-color: var(--primaryTextLight);
+      color: var(--darkBlueShade);
+    }
+  }
+
+  // .detailed__info {
+  //   background-color: var(--darkBlueShade);
+  //   color: var(--primaryTextLight);
+  // }
 }
