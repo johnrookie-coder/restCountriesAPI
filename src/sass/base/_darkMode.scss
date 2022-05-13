@@ -1,0 +1,31 @@
+// Dark mode
+.dark {
+  background-color: var(--darkBlueShade);
+  color: var(--primaryTextLight);
+
+  .header {
+    background-color: var(--darkBlue);
+  }
+
+  .inputs,
+  .search__input,
+  .select {
+    background-color: var(--darkBlue);
+    color: inherit;
+  }
+
+  .card {
+    background-color: var(--darkBlue);
+  }
+
+  .btn {
+    background-color: var(--darkBlue);
+    color: var(--primaryTextLight);
+
+    &__border:hover,
+    &__back:hover {
+      background-color: var(--primaryTextLight);
+      color: var(--darkBlueShade);
+    }
+  }
+}

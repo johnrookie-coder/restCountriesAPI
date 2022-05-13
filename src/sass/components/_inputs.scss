@@ -38,8 +38,10 @@
   top: 1.6rem;
   left: 2rem;
 
-  color: var(--darkGray);
-  height: 100%;
+  // color: var(--darkGray);
+  font-size: inherit;
+
+  height: 1.2em;
   z-index: 100;
 }
 
