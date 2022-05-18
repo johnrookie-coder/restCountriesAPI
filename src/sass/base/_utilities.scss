@@ -4,8 +4,50 @@
 }
 
 .icon {
+  stroke: currentColor;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+
   font-size: 1.4rem;
   margin-right: 0.4rem;
 
   height: 1.8rem;
+  width: 1.6rem;
+
+  &--back {
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    text-align: center;
+
+    margin-right: 0.8rem;
+  }
+}
+
+circle,
+line,
+polyline {
+  stroke: currentColor;
+
+  &.input {
+    stroke: #858585;
+  }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.6rem;
+
+  padding: 4rem 0;
+  margin: auto 0;
+  height: 100%;
+  width: 90vw;
+
+  span {
+    font-size: 1.8rem;
+  }
 }

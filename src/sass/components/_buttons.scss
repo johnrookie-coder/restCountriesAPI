@@ -15,16 +15,8 @@
   &__back {
     display: flex;
 
-    margin-bottom: 2.4rem;
+    margin-bottom: min(8vw, 4rem);
     padding: 0.8rem 2.4rem;
-
-    img.icon {
-      align-items: center;
-      justify-content: center;
-      align-self: center;
-
-      margin-right: 0.8rem;
-    }
   }
 
   &__border,

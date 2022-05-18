@@ -6,59 +6,17 @@ const form = document.querySelector("form");
 const selectEl = document.querySelector(".select");
 
 const cardContainer = document.querySelector(".cards__container");
+const detailedInfo = document.querySelector(".detailed__info");
 const body = document.body;
 
+const loadingMarkup = `
+  <div class="loading">
+     <div class="loader"></div>
+     <span>Loading...</span>
+  </div>
+`;
+
 let clickBorder = [];
-
-// Form
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  // Get the search country
-  const searchValue = searchInput.value;
-
-  // Await for the response
-  const country = await getCountries(
-    `https://restcountries.com/v3.1/name/${searchValue}`
-  );
-
-  // Guard clause
-  if (searchValue === "") return;
-  if (country === undefined) return;
-
-  // Check whether the country exists and the searchValue is not an empty string.
-  if (searchValue !== "" && country !== undefined) {
-    clearFields();
-    renderCard(country);
-  }
-});
-
-// Mode switch
-btnModeSwitch.addEventListener("click", (e) => {
-  // HTML markup for light and dark mode
-  const htmlDarkMode = `
-    <img src="images/moon.svg" alt="icon" class="icon" />
-    <span>Dark Mode</span>
-  `;
-
-  const htmlLightMode = `
-    <img src="images/sun.svg" alt="icon" class="icon" />
-    <span>Light Mode</span>
-  `;
-
-  // Toggle between two modes
-  if (e.target.closest(".btn")) body.classList.toggle("dark");
-
-  // Clearing existing markup
-  btnModeSwitch.innerHTML = "";
-
-  // Set the markup based on which mode is selected
-  if (!body.classList.contains("dark"))
-    btnModeSwitch.insertAdjacentHTML("beforeend", htmlDarkMode);
-
-  if (body.classList.contains("dark"))
-    btnModeSwitch.insertAdjacentHTML("beforeend", htmlLightMode);
-});
 
 /**
  * Get countries from a web server
@@ -70,19 +28,22 @@ const getCountries = async function (url) {
     const response = await fetch(url);
     const data = await response.json();
 
+    if (!response.ok || data === undefined)
+      throw new Error("Country not found!");
+
     // From the array, we loop through with each of them
     // Take the country common name and sort it alphabetically.
     const sorted = data.sort((next, prev) =>
       next.name.common > prev.name.common ? 1 : -1
     );
 
-    if (!response.ok) throw new Error("Country not found!");
-
-    // todo: refactor
-    if (data.length > 1) return sorted;
     if (data.length === 1) return data;
+    if (data.length > 1) return sorted;
   } catch (err) {
+    detailedInfo.innerHTML = "";
     renderErr(err);
+  } finally {
+    cardContainer.innerHTML = "";
   }
 };
 
@@ -122,18 +83,45 @@ const renderCard = function (data) {
  * @param {*} data receives an array of "data" based on the selected country or region.
  */
 const renderDetailedInfo = async function (data) {
-  const [{ name: currency }] = Object.values(data.currencies);
-  const languages = Object.values(data.languages).map((language) => language);
-  const [{ official: nativeName }] = Object.values(data.name.nativeName);
+  try {
+    const [{ name: currency }] = Object.values(data.currencies);
+    const languages = Object.values(data.languages).map((language) => language);
+    const [{ official: nativeName }] = Object.values(data.name.nativeName);
 
-  const borders = await borderMarkup(data);
+    // Show spinner
+    detailedInfo.innerHTML = loadingMarkup;
 
-  const htmlMarkup = `
-  <div class="detailed__info">
-  <button class="btn btn__back">
-    <img src="images/arrow-left.svg" alt="icon" class="icon" />
-    <span>Back</span>
-  </button>
+    const borders = await borderMarkup(data);
+    const htmlMarkup = `
+      <button class="btn btn__back">
+        <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 256 256"
+        style="user-select: auto"
+        class="icon icon--back"
+      >
+      <line
+        x1="216"
+        y1="128"
+        x2="40"
+        y2="128"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="16"
+        style="user-select: auto"
+      ></line>
+      <polyline
+        points="112 56 40 128 112 200"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="16"
+        style="user-select: auto"
+      ></polyline>
+    </svg>
+      <span>Back</span>
+    </button>
 
   <div class="country">
     <div class="country__imgContainer">
@@ -178,13 +166,17 @@ const renderDetailedInfo = async function (data) {
         </div>
       </section>
     </div>
-  </div>
   `;
+    // main.innerHTML = "";
+    // detailedInfo.insertAdjacentHTML("beforeend", htmlMarkup);
 
-  body.innerHTML = "";
-  body.insertAdjacentHTML("beforeend", htmlMarkup);
-  backBtn();
-  borderClickEvent();
+    detailedInfo.innerHTML = htmlMarkup;
+    showDetailedInfo();
+    backBtn();
+    borderClickEvent();
+  } catch (err) {
+    renderErr(err);
+  }
 };
 
 /**
@@ -196,22 +188,26 @@ const borderMarkup = async function (data) {
   const neighbor = data?.borders;
   const borders = [];
 
-  // Guard clause
-  if (!neighbor) return;
+  try {
+    // Guard clause
+    if (!neighbor) return;
 
-  // Creates button which contains the neighboring country of the selected country.
-  for (const code of neighbor) {
-    const [dataBorders] = await getCountries(
-      `https://restcountries.com/v3.1/alpha/${code}`
-    );
-    const borderMarkup = `
-       <button class="btn btn__border">${dataBorders.name.common}</button>
-    `;
+    // Creates button which contains the neighboring country of the selected country.
+    for (const code of neighbor) {
+      const [dataBorders] = await getCountries(
+        `https://restcountries.com/v3.1/alpha/${code}`
+      );
+      const borderMarkup = `
+         <button class="btn btn__border">${dataBorders.name.common}</button>
+      `;
 
-    borders.push(borderMarkup);
+      borders.push(borderMarkup);
+    }
+  } catch (err) {
+    renderErr(err);
   }
 
-  return [...borders];
+  return [...borders].join(" ");
 };
 
 /**
@@ -222,18 +218,31 @@ const renderErr = function (err) {
   const errMarkup = `
   <div class="error">
     <h1 class="error__status">404</h1>
-    <p class="error__message">${err}</p>
+    <p class="error__message">${err.message}</p>
   </div>;
   `;
 
   clearFields();
-  cardContainer.insertAdjacentHTML("beforeend", errMarkup);
+  detailedInfo.insertAdjacentHTML("beforeend", errMarkup);
 };
 
 // Clear UI
 const clearFields = function () {
   cardContainer.innerHTML = "";
   searchInput.value = "";
+};
+
+// Show card container and hide detailedInfo
+const showCardContainer = function () {
+  cardContainer.classList.remove("hidden");
+  detailedInfo.innerHTML = "";
+  detailedInfo.classList.add("hidden");
+};
+
+// Show detailed info and hide card container
+const showDetailedInfo = function () {
+  cardContainer.classList.add("hidden");
+  detailedInfo.classList.remove("hidden");
 };
 
 /**
@@ -247,11 +256,188 @@ const formatNumber = function (num) {
 };
 
 //////////////////////
-// Events;
+// Events
+// Form
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  try {
+    // Get the search country
+    const searchValue = searchInput.value;
+
+    // Show spinner
+    cardContainer.innerHTML = loadingMarkup;
+
+    // Await for the response
+    const country = await getCountries(
+      `https://restcountries.com/v3.1/name/${searchValue}`
+    );
+
+    // Guard clause
+    if (searchValue === "") return;
+    if (country === undefined) return;
+
+    // Check whether the country exists and the searchValue is not an empty string.
+    if (searchValue !== "" && country !== undefined) {
+      clearFields();
+      showCardContainer();
+      renderCard(country);
+    }
+  } catch (err) {
+    renderErr(err);
+  }
+});
+
+// Theme switch
+btnModeSwitch.addEventListener("click", (e) => {
+  // HTML markup for light and dark mode
+  const htmlDarkMode = `
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 256 256"
+    style="user-select: auto"
+    class="icon"
+  >
+    <path
+      d="M216.7,152.6A91.9,91.9,0,0,1,103.4,39.3h0A92,92,0,1,0,216.7,152.6Z"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="16"
+      style="user-select: auto"
+    ></path>
+  </svg>
+  <span>Dark Mode</span>
+  `;
+
+  const htmlLightMode = `
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 256 256"
+    style="user-select: auto"
+    class="icon"
+  >
+    <circle
+      cx="128"
+      cy="128"
+      r="60"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="16"
+      style="user-select: auto"
+    ></circle>
+    <line
+      x1="128"
+      y1="36"
+      x2="128"
+      y2="16"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="16"
+      style="user-select: auto"
+    ></line>
+    <line
+      x1="62.9"
+      y1="62.9"
+      x2="48.8"
+      y2="48.8"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="16"
+      style="user-select: auto"
+    ></line>
+    <line
+      x1="36"
+      y1="128"
+      x2="16"
+      y2="128"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="16"
+      style="user-select: auto"
+    ></line>
+    <line
+      x1="62.9"
+      y1="193.1"
+      x2="48.8"
+      y2="207.2"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="16"
+      style="user-select: auto"
+    ></line>
+    <line
+      x1="128"
+      y1="220"
+      x2="128"
+      y2="240"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="16"
+      style="user-select: auto"
+    ></line>
+    <line
+      x1="193.1"
+      y1="193.1"
+      x2="207.2"
+      y2="207.2"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="16"
+      style="user-select: auto"
+    ></line>
+    <line
+      x1="220"
+      y1="128"
+      x2="240"
+      y2="128"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="16"
+      style="user-select: auto"
+    ></line>
+    <line
+      x1="193.1"
+      y1="62.9"
+      x2="207.2"
+      y2="48.8"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="16"
+      style="user-select: auto"
+    ></line>
+  </svg>
+  <span>Light mode</span>
+  `;
+
+  // Toggle between two modes
+  if (e.target.closest(".btn")) body.classList.toggle("dark");
+
+  // Clearing existing markup
+  btnModeSwitch.innerHTML = "";
+
+  // Set the markup based on which mode is selected
+  if (!body.classList.contains("dark"))
+    btnModeSwitch.insertAdjacentHTML("beforeend", htmlDarkMode);
+
+  if (body.classList.contains("dark"))
+    btnModeSwitch.insertAdjacentHTML("beforeend", htmlLightMode);
+});
+
 // Add a click event to the entire cardContainer and
 // Get the class named "card" and use its attribute to display detailed country info.
 cardContainer.addEventListener("click", async (e) => {
   // Get the name of the selected/click country and search it by name.
+
   const country = e.target
     .closest(".card")
     .children[0].children[0].getAttribute("alt");
@@ -272,16 +458,24 @@ cardContainer.addEventListener("click", async (e) => {
 
 // Watch any changes from the select element
 selectEl.addEventListener("change", async (e) => {
-  // Get the selected region
-  const region = e.target.value;
+  try {
+    // Get the selected region
+    const region = e.target.value;
 
-  // Await for the response from the server
-  const country = await getCountries(
-    `https://restcountries.com/v3.1/region/${region}`
-  );
+    // Show spinner
+    cardContainer.innerHTML = loadingMarkup;
 
-  clearFields();
-  renderCard(country);
+    // Await for the response from the server
+    const country = await getCountries(
+      `https://restcountries.com/v3.1/region/${region}`
+    );
+
+    clearFields();
+    showCardContainer();
+    renderCard(country);
+  } catch (err) {
+    renderErr(err);
+  }
 });
 
 /**
@@ -301,10 +495,7 @@ const borderClickEvent = function () {
       // Records the click on the border country and push it on the clickBorder
       clickBorder.push(data);
 
-      console.log(clickBorder);
-
       // Always render the last click item
-      // Todo: refactor
       const countryData = clickBorder.length - 1;
       renderDetailedInfo(clickBorder[countryData]);
     });
@@ -318,18 +509,17 @@ const backBtn = function () {
   const btnBack = document.querySelector(".btn__back");
   btnBack.addEventListener("click", (e) => {
     clickBorder;
+
     let leng = clickBorder.length - 1;
+    leng--;
 
-    if (clickBorder.length !== 0) {
-      leng--;
-
+    if (leng >= 0) {
       const prevCountry = clickBorder[leng];
       clickBorder.pop();
       renderDetailedInfo(prevCountry);
     }
 
-    // // Not working length is NULL
-    // if (!clickBorder.length) window.location.reload();
+    if (leng < 0) window.location.reload();
   });
 };
 

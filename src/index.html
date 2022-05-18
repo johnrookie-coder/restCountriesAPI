@@ -19,26 +19,69 @@
     <header class="header center">
       <nav class="navigation">
         <div class="navigation__logo">
-          <h1 class="navigation__text">Where in the world?</h1>
+          <h1 class="navigation__text">
+            <a href="index.html">Where in the world?</a>
+          </h1>
         </div>
 
         <button class="btn btn__toggle">
-          <img src="images/moon.svg" alt="icon" class="icon" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="192"
+            height="192"
+            viewBox="0 0 256 256"
+            style="user-select: auto"
+            class="icon"
+          >
+            <path
+              d="M216.7,152.6A91.9,91.9,0,0,1,103.4,39.3h0A92,92,0,1,0,216.7,152.6Z"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="16"
+              style="user-select: auto"
+            ></path>
+          </svg>
           <span>Dark Mode</span>
         </button>
       </nav>
     </header>
 
     <main class="main">
+      <!-- <div class="loader"></div> -->
       <form>
         <div class="inputs">
-          <div class="inputs__icon">
-            <img
-              src="images/magnifying-glass.svg"
-              alt="icon"
-              class="icon icon--left"
-            />
-          </div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="#858585"
+            viewBox="0 0 256 256"
+            style="user-select: auto"
+            class="icon icon--left"
+          >
+            <circle
+              cx="116"
+              cy="116"
+              r="84"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="16"
+              style="user-select: auto"
+              class="input"
+            ></circle>
+            <line
+              x1="175.4"
+              y1="175.4"
+              x2="224"
+              y2="224"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="16"
+              style="user-select: auto"
+              class="input"
+            ></line>
+          </svg>
 
           <div class="inputs__textbox">
             <input
@@ -60,157 +103,40 @@
             <option value="europe">Europe</option>
             <option value="oceania">Oceania</option>
           </select>
-          <img
-            src="images/caret-down.svg"
-            alt="icon"
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="192"
+            height="192"
+            viewBox="0 0 256 256"
+            style="user-select: auto"
             class="icon arrow__down"
-          />
+          >
+            <polyline
+              points="208 96 128 176 48 96"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="16"
+              style="user-select: auto"
+            ></polyline>
+          </svg>
         </div>
       </form>
 
+      <!-- <div class="loading">
+        <div class="loader"></div>
+        <span>Loading...</span>
+      </div> -->
+
       <section class="cards__container">
-        <!-- <div class="card">
-          <div class="card__img">
-            <img
-              src="https://flagcdn.com/um.svg"
-              alt="flag"
-              class="card__flag"
-            />
-          </div>
-          <div class="card__desc">
-            <h2 class="card__name">United States of America</h2>
-            <p class="card__text"><strong>Population:</strong> 323,947,000</p>
-            <p class="card__text"><strong>Region:</strong> Americas</p>
-            <p class="card__text"><strong>Capital:</strong> Washington, D.C</p>
-          </div>
+        <div class="loading">
+          <div class="loader"></div>
+          <span>Loading...</span>
         </div>
-
-        <div class="card">
-          <div class="card__img">
-            <img
-              src="https://flagcdn.com/jp.svg"
-              alt="flag"
-              class="card__flag"
-            />
-          </div>
-          <div class="card__desc">
-            <h2 class="card__name">Japan</h2>
-            <p class="card__text"><strong>Population:</strong> 323,947,000</p>
-            <p class="card__text"><strong>Region:</strong> Americas</p>
-            <p class="card__text"><strong>Capital:</strong> Washington, D.C</p>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card__img">
-            <img
-              src="https://flagcdn.com/ph.svg"
-              alt="flag"
-              class="card__flag"
-            />
-          </div>
-          <div class="card__desc">
-            <h2 class="card__name">Philippines</h2>
-            <p class="card__text"><strong>Population:</strong> 323,947,000</p>
-            <p class="card__text"><strong>Region:</strong> Americas</p>
-            <p class="card__text"><strong>Capital:</strong> Washington, D.C</p>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card__img">
-            <img
-              src="https://flagcdn.com/th.svg"
-              alt="flag"
-              class="card__flag"
-            />
-          </div>
-          <div class="card__desc">
-            <h2 class="card__name">Thailand</h2>
-            <p class="card__text"><strong>Population:</strong> 323,947,000</p>
-            <p class="card__text"><strong>Region:</strong> Americas</p>
-            <p class="card__text"><strong>Capital:</strong> Washington, D.C</p>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card__img">
-            <img
-              src="https://flagcdn.com/kh.svg"
-              alt="flag"
-              class="card__flag"
-            />
-          </div>
-          <div class="card__desc">
-            <h2 class="card__name">United States of America</h2>
-            <p class="card__text"><strong>Population:</strong> 323,947,000</p>
-            <p class="card__text"><strong>Region:</strong> Americas</p>
-            <p class="card__text"><strong>Capital:</strong> Washington, D.C</p>
-          </div>
-        </div> -->
       </section>
 
-      <!-- Detailed country info -->
-      <!-- <div class="detailed__info">
-        <button class="btn btn__back">
-          <img src="images/arrow-left.svg" alt="icon" class="icon" />
-          <span>Back</span>
-        </button>
-
-        <div class="country">
-          <div class="country__imgContainer">
-            <img
-              src="https://flagcdn.com/ph.svg"
-              alt="country flag"
-              class="country__img"
-            />
-          </div>
-
-          <section class="country_wrapper">
-            <h2 class="country__name">Belgium</h2>
-
-            <div class="country__details">
-              <div class="country__col--1">
-                <p><strong>Native Name:</strong> Belgie</p>
-                <p><strong>Population:</strong> 1,215,398</p>
-                <p><strong>Region:</strong> Europe</p>
-                <p><strong>Sub Region:</strong> Western Europe</p>
-                <p><strong>Capital:</strong> Brussels</p>
-              </div>
-
-              <div class="country__col--2">
-                <p><strong>Top Level Domain:</strong> .be</p>
-                <p><strong>Currencies:</strong> Euro</p>
-                <p>
-                  <strong>Languages:</strong> Dutch, French, German Dutch,
-                  French, German
-                </p>
-              </div>
-
-              <div class="country__col--3">
-                <div class="border">
-                  <div class="border__text">
-                    <p><strong>Border Countries:</strong></p>
-                  </div>
-                  <div class="border__country">
-                    <button class="btn btn__border">France</button>
-                    <button class="btn btn__border">Germany</button>
-                    <button class="btn btn__border">Netherlands</button>
-                    <button class="btn btn__border">France</button>
-                    <button class="btn btn__border">Germany</button>
-                    <button class="btn btn__border">Netherlands</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-      </div> -->
-
-      <!-- <div class="error">
-        <h1 class="error__status">404</h1>
-        <p class="error__message">Country not found!</p>
-      </div> -->
+      <div class="detailed__info"></div>
     </main>
   </body>
 </html>

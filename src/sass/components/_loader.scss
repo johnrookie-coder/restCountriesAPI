@@ -1,0 +1,17 @@
+.loader {
+  border: 1.2rem solid #9b9b9b;
+  border-top: 1.2rem solid currentColor; /* Blue */
+  border-radius: 50%;
+  width: 6.4rem;
+  height: 6.4rem;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

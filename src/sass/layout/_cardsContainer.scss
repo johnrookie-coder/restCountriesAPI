@@ -1,13 +1,11 @@
 .cards__container {
   display: grid;
-
   overflow: hidden;
   margin: 8rem auto;
   max-width: 120rem;
   width: 90%;
 
   @media (min-width: 300px) {
-    // grid-template-columns: repeat(1, 1fr);
     gap: 3.2rem 0;
   }
 
@@ -19,5 +17,9 @@
   @media (min-width: 992px) {
     grid-template-columns: repeat(4, 1fr);
     gap: 6rem 2.4rem;
+  }
+
+  &.hidden {
+    display: none;
   }
 }
