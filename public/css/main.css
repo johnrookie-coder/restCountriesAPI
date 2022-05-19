@@ -262,6 +262,10 @@ polyline.input {
   font-size: 1.8rem;
 }
 
+form.hidden {
+  display: none;
+}
+
 .loader {
   border: 1.2rem solid #9b9b9b;
   border-top: 1.2rem solid currentColor;
@@ -306,6 +310,9 @@ polyline.input {
   margin: 8rem auto;
   max-width: 120rem;
   width: 90%;
+}
+.cards__container.center {
+  grid-template-columns: repeat(1, 1fr);
 }
 @media (min-width: 300px) {
   .cards__container {

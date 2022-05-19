@@ -40,8 +40,8 @@ const getCountries = async function (url) {
     if (data.length === 1) return data;
     if (data.length > 1) return sorted;
   } catch (err) {
-    detailedInfo.innerHTML = "";
-    renderErr(err);
+    clearFields();
+    renderErr(err, cardContainer);
   } finally {
     cardContainer.innerHTML = "";
   }
@@ -54,26 +54,28 @@ const getCountries = async function (url) {
 const renderCard = function (data) {
   for (const countryData of data) {
     const cardMarkup = `
-    <div class="card">
-      <div class="card__img">
-        <img
-          src="${countryData.flags.svg}"
-          alt="${countryData.name.common}"
-          class="card__flag"
-        />
+      <div class="card">
+        <div class="card__img">
+          <img
+            src="${countryData.flags.svg}"
+            alt="${countryData.name.common}"
+            class="card__flag"
+          />
+        </div>
+        <div class="card__desc">
+          <h2 class="card__name">${countryData.name.official}</h2>
+          <p class="card__text"><strong>Population:</strong> ${formatNumber(
+            countryData.population
+          )}</p>
+          <p class="card__text"><strong>Region:</strong> ${
+            countryData.region
+          }</p>
+          <p class="card__text"><strong>Capital:</strong> ${
+            countryData.capital
+          }</p>
+        </div>
       </div>
-      <div class="card__desc">
-        <h2 class="card__name">${countryData.name.official}</h2>
-        <p class="card__text"><strong>Population:</strong> ${formatNumber(
-          countryData.population
-        )}</p>
-        <p class="card__text"><strong>Region:</strong> ${countryData.region}</p>
-        <p class="card__text"><strong>Capital:</strong> ${
-          countryData.capital
-        }</p>
-      </div>
-    </div>
-  `;
+    `;
     cardContainer.insertAdjacentHTML("beforeend", cardMarkup);
   }
 };
@@ -167,9 +169,8 @@ const renderDetailedInfo = async function (data) {
       </section>
     </div>
   `;
-    // main.innerHTML = "";
-    // detailedInfo.insertAdjacentHTML("beforeend", htmlMarkup);
 
+    form.classList.add("hidden");
     detailedInfo.innerHTML = htmlMarkup;
     showDetailedInfo();
     backBtn();
@@ -219,11 +220,11 @@ const renderErr = function (err) {
   <div class="error">
     <h1 class="error__status">404</h1>
     <p class="error__message">${err.message}</p>
-  </div>;
+  </div>
   `;
 
   clearFields();
-  detailedInfo.insertAdjacentHTML("beforeend", errMarkup);
+  return errMarkup;
 };
 
 // Clear UI
@@ -265,6 +266,7 @@ form.addEventListener("submit", async (e) => {
     // Get the search country
     const searchValue = searchInput.value;
 
+    cardContainer.classList.remove("center");
     // Show spinner
     cardContainer.innerHTML = loadingMarkup;
 
@@ -275,7 +277,7 @@ form.addEventListener("submit", async (e) => {
 
     // Guard clause
     if (searchValue === "") return;
-    if (country === undefined) return;
+    if (country === undefined) throw new Error("Country not found!");
 
     // Check whether the country exists and the searchValue is not an empty string.
     if (searchValue !== "" && country !== undefined) {
@@ -284,7 +286,8 @@ form.addEventListener("submit", async (e) => {
       renderCard(country);
     }
   } catch (err) {
-    renderErr(err);
+    cardContainer.classList.add("center");
+    cardContainer.insertAdjacentHTML("beforeend", renderErr(err));
   }
 });
 
@@ -462,6 +465,7 @@ selectEl.addEventListener("change", async (e) => {
     // Get the selected region
     const region = e.target.value;
 
+    cardContainer.classList.remove("center");
     // Show spinner
     cardContainer.innerHTML = loadingMarkup;
 
